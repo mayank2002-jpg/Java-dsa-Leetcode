@@ -1,0 +1,25 @@
+441. Arranging Coins --> https://leetcode.com/problems/arranging-coins/
+
+
+class Solution {
+    public int arrangeCoins(int n) {
+        long low = 1, high = n;
+        
+        while(low<=high){
+            long mid = low + (high-low)/2;
+            long sum = mid*(mid+1)/2;    // Sum of Natural Numbers for 1+2+3+4+5+6.......+n = n(n+1)/2 As we can see in quetion it follows a natural number series
+            
+            if(sum == n){
+                return (int)mid;
+            }
+            else if(sum<n){
+                low = mid+1; 
+            }
+            else{
+               high = mid-1; 
+            }
+                
+        }
+        return (int)high;
+    }
+}
