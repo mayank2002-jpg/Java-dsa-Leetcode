@@ -1,0 +1,32 @@
+888. Fair Candy Swap --> https://leetcode.com/problems/fair-candy-swap/
+
+
+class Solution {
+    private int binarySearch(int[] arr, int target){
+        int low = 0, high = arr.length-1;
+         while(low<=high){
+            int mid = low+ (high-low)/2;
+            if(arr[mid]==target) return mid;
+            else if(arr[mid]<target) low=mid+1;
+            else high=mid-1;
+        }
+        return -1;
+    }
+    
+    
+    public int[] fairCandySwap(int[] A, int[] B) {
+        int sumA = 0, sumB = 0;
+        for(int i = 0; i<A.length;i++)
+            sumA += A[i];
+        for(int i = 0; i<B.length;i++)
+            sumB += B[i];
+        int diff = (sumA-sumB)/2;
+        
+        Arrays.sort(A);
+        for(int num : B){
+             if (binarySearch(A,num+diff) !=-1)
+                 return new int[]{num+diff,num};
+        }
+        return null;
+    }
+}
